@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MUAI_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="договор">
+          <Key>
+            <PropertyRef Name="ИД_договор" />
+          </Key>
+          <Property Name="ИД_договор" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ИД_клиента" Type="int" Nullable="false" />
+          <Property Name="ИД_пользователя" Type="int" Nullable="false" />
+          <Property Name="Тип" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Номер" Type="int" Nullable="false" />
+          <Property Name="Дата" Type="date" Nullable="false" />
+          <Property Name="Файл" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="клиент">
+          <Key>
+            <PropertyRef Name="ИД_клиента" />
+          </Key>
+          <Property Name="ИД_клиента" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ФИО" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Адрес" Type="nvarchar" MaxLength="50" />
+          <Property Name="Телефон" Type="bigint" />
+          <Property Name="Эл_почта" Type="varchar" MaxLength="50" />
+          <Property Name="Документ_тип" Type="nchar" MaxLength="10" />
+          <Property Name="Документ_номер" Type="nvarchar" MaxLength="50" />
+          <Property Name="Дата_рождения" Type="date" />
+        </EntityType>
+        <EntityType Name="личн_услуги">
+          <Key>
+            <PropertyRef Name="ИД_лу" />
+          </Key>
+          <Property Name="ИД_лу" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ИД_кабинета" Type="int" Nullable="false" />
+          <Property Name="ИД_услуги" Type="int" Nullable="false" />
+          <Property Name="Дата_услуги" Type="date" Nullable="false" />
+          <Property Name="Состояние" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="личный_кабинет">
+          <Key>
+            <PropertyRef Name="ИД_кабинета" />
+          </Key>
+          <Property Name="ИД_кабинета" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ИД_клиента" Type="int" Nullable="false" />
+          <Property Name="ИД_тарифа" Type="int" Nullable="false" />
+          <Property Name="Дата_тарифа" Type="date" />
+        </EntityType>
+        <EntityType Name="пользователь">
+          <Key>
+            <PropertyRef Name="ИД_пользователя" />
+          </Key>
+          <Property Name="ИД_пользователя" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Уровень" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Логин" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Пароль" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ИД_клиента" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="тариф">
+          <Key>
+            <PropertyRef Name="ИД_тарифа" />
+          </Key>
+          <Property Name="ИД_тарифа" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ИД_пользователя" Type="int" Nullable="false" />
+          <Property Name="Тип1" Type="int" />
+          <Property Name="Тип2" Type="int" />
+          <Property Name="Название" Type="nvarchar" MaxLength="50" />
+          <Property Name="Описание" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="услуга">
+          <Key>
+            <PropertyRef Name="ИД_услуги" />
+          </Key>
+          <Property Name="ИД_услуги" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ИД_пользователя" Type="int" Nullable="false" />
+          <Property Name="Название" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Тип1" Type="int" Nullable="false" />
+          <Property Name="Тип2" Type="int" Nullable="false" />
+          <Property Name="Дата_созд" Type="date" Nullable="false" />
+          <Property Name="Дата_начало" Type="date" Nullable="false" />
+          <Property Name="Дата_конец" Type="date" Nullable="false" />
+          <Property Name="Описание" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="MUAI_DBModelStoreContainer">
+          <EntitySet Name="договор" EntityType="Self.договор" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="клиент" EntityType="Self.клиент" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="личн_услуги" EntityType="Self.личн_услуги" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="личный_кабинет" EntityType="Self.личный_кабинет" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="пользователь" EntityType="Self.пользователь" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="тариф" EntityType="Self.тариф" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="услуга" EntityType="Self.услуга" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MUAI_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="договор">
+          <Key>
+            <PropertyRef Name="ИД_договор" />
+          </Key>
+          <Property Name="ИД_договор" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ИД_клиента" Type="Int32" Nullable="false" />
+          <Property Name="ИД_пользователя" Type="Int32" Nullable="false" />
+          <Property Name="Тип" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Номер" Type="Int32" Nullable="false" />
+          <Property Name="Дата" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Файл" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="клиент">
+          <Key>
+            <PropertyRef Name="ИД_клиента" />
+          </Key>
+          <Property Name="ИД_клиента" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ФИО" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Адрес" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Телефон" Type="Int64" />
+          <Property Name="Эл_почта" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Документ_тип" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Документ_номер" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Дата_рождения" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="личн_услуги">
+          <Key>
+            <PropertyRef Name="ИД_лу" />
+          </Key>
+          <Property Name="ИД_лу" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ИД_кабинета" Type="Int32" Nullable="false" />
+          <Property Name="ИД_услуги" Type="Int32" Nullable="false" />
+          <Property Name="Дата_услуги" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Состояние" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="личный_кабинет">
+          <Key>
+            <PropertyRef Name="ИД_кабинета" />
+          </Key>
+          <Property Name="ИД_кабинета" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ИД_клиента" Type="Int32" Nullable="false" />
+          <Property Name="ИД_тарифа" Type="Int32" Nullable="false" />
+          <Property Name="Дата_тарифа" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="пользователь">
+          <Key>
+            <PropertyRef Name="ИД_пользователя" />
+          </Key>
+          <Property Name="ИД_пользователя" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Уровень" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Логин" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Пароль" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ИД_клиента" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="тариф">
+          <Key>
+            <PropertyRef Name="ИД_тарифа" />
+          </Key>
+          <Property Name="ИД_тарифа" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ИД_пользователя" Type="Int32" Nullable="false" />
+          <Property Name="Тип1" Type="Int32" />
+          <Property Name="Тип2" Type="Int32" />
+          <Property Name="Название" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Описание" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="услуга">
+          <Key>
+            <PropertyRef Name="ИД_услуги" />
+          </Key>
+          <Property Name="ИД_услуги" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ИД_пользователя" Type="Int32" Nullable="false" />
+          <Property Name="Название" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Тип1" Type="Int32" Nullable="false" />
+          <Property Name="Тип2" Type="Int32" Nullable="false" />
+          <Property Name="Дата_созд" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Дата_начало" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Дата_конец" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Описание" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="MUAI_DBEntities4" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="договор" EntityType="Self.договор" />
+          <EntitySet Name="клиент" EntityType="Self.клиент" />
+          <EntitySet Name="личн_услуги" EntityType="Self.личн_услуги" />
+          <EntitySet Name="личный_кабинет" EntityType="Self.личный_кабинет" />
+          <EntitySet Name="пользователь" EntityType="Self.пользователь" />
+          <EntitySet Name="тариф" EntityType="Self.тариф" />
+          <EntitySet Name="услуга" EntityType="Self.услуга" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MUAI_DBModelStoreContainer" CdmEntityContainer="MUAI_DBEntities4">
+          <EntitySetMapping Name="договор">
+            <EntityTypeMapping TypeName="MUAI_DBModel.договор">
+              <MappingFragment StoreEntitySet="договор">
+                <ScalarProperty Name="ИД_договор" ColumnName="ИД_договор" />
+                <ScalarProperty Name="ИД_клиента" ColumnName="ИД_клиента" />
+                <ScalarProperty Name="ИД_пользователя" ColumnName="ИД_пользователя" />
+                <ScalarProperty Name="Тип" ColumnName="Тип" />
+                <ScalarProperty Name="Номер" ColumnName="Номер" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="Файл" ColumnName="Файл" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="клиент">
+            <EntityTypeMapping TypeName="MUAI_DBModel.клиент">
+              <MappingFragment StoreEntitySet="клиент">
+                <ScalarProperty Name="ИД_клиента" ColumnName="ИД_клиента" />
+                <ScalarProperty Name="ФИО" ColumnName="ФИО" />
+                <ScalarProperty Name="Адрес" ColumnName="Адрес" />
+                <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+                <ScalarProperty Name="Эл_почта" ColumnName="Эл_почта" />
+                <ScalarProperty Name="Документ_тип" ColumnName="Документ_тип" />
+                <ScalarProperty Name="Документ_номер" ColumnName="Документ_номер" />
+                <ScalarProperty Name="Дата_рождения" ColumnName="Дата_рождения" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="личн_услуги">
+            <EntityTypeMapping TypeName="MUAI_DBModel.личн_услуги">
+              <MappingFragment StoreEntitySet="личн_услуги">
+                <ScalarProperty Name="ИД_лу" ColumnName="ИД_лу" />
+                <ScalarProperty Name="ИД_кабинета" ColumnName="ИД_кабинета" />
+                <ScalarProperty Name="ИД_услуги" ColumnName="ИД_услуги" />
+                <ScalarProperty Name="Дата_услуги" ColumnName="Дата_услуги" />
+                <ScalarProperty Name="Состояние" ColumnName="Состояние" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="личный_кабинет">
+            <EntityTypeMapping TypeName="MUAI_DBModel.личный_кабинет">
+              <MappingFragment StoreEntitySet="личный_кабинет">
+                <ScalarProperty Name="ИД_кабинета" ColumnName="ИД_кабинета" />
+                <ScalarProperty Name="ИД_клиента" ColumnName="ИД_клиента" />
+                <ScalarProperty Name="ИД_тарифа" ColumnName="ИД_тарифа" />
+                <ScalarProperty Name="Дата_тарифа" ColumnName="Дата_тарифа" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="пользователь">
+            <EntityTypeMapping TypeName="MUAI_DBModel.пользователь">
+              <MappingFragment StoreEntitySet="пользователь">
+                <ScalarProperty Name="ИД_пользователя" ColumnName="ИД_пользователя" />
+                <ScalarProperty Name="Уровень" ColumnName="Уровень" />
+                <ScalarProperty Name="Логин" ColumnName="Логин" />
+                <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+                <ScalarProperty Name="ИД_клиента" ColumnName="ИД_клиента" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="тариф">
+            <EntityTypeMapping TypeName="MUAI_DBModel.тариф">
+              <MappingFragment StoreEntitySet="тариф">
+                <ScalarProperty Name="ИД_тарифа" ColumnName="ИД_тарифа" />
+                <ScalarProperty Name="ИД_пользователя" ColumnName="ИД_пользователя" />
+                <ScalarProperty Name="Тип1" ColumnName="Тип1" />
+                <ScalarProperty Name="Тип2" ColumnName="Тип2" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="услуга">
+            <EntityTypeMapping TypeName="MUAI_DBModel.услуга">
+              <MappingFragment StoreEntitySet="услуга">
+                <ScalarProperty Name="ИД_услуги" ColumnName="ИД_услуги" />
+                <ScalarProperty Name="ИД_пользователя" ColumnName="ИД_пользователя" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+                <ScalarProperty Name="Тип1" ColumnName="Тип1" />
+                <ScalarProperty Name="Тип2" ColumnName="Тип2" />
+                <ScalarProperty Name="Дата_созд" ColumnName="Дата_созд" />
+                <ScalarProperty Name="Дата_начало" ColumnName="Дата_начало" />
+                <ScalarProperty Name="Дата_конец" ColumnName="Дата_конец" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
